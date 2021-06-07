@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<ul th:fragment="page" th:if="${PAGE_ITEM.PAGE_COUNT > 1}" class="pagination pagination-lg">
+    <li th:class="${PAGE_ITEM.PAGE_INDEX == 1} ? 'disabled' : ''">
+        <a th:if="${PAGE_ITEM.PAGE_INDEX != 1}" th:href="@{${PAGE_ITEM.PAGE_URL_PATH} + '?pageIndex=' + ${PAGE_ITEM.PAGE_INDEX-1} + ${PAGE_ITEM.PAGE_URL_PARAMETER}}"> &lt; </a>
+        <a th:if="${PAGE_ITEM.PAGE_INDEX == 1}"> &lt; </a>
+    </li>
+    <li th:if="${PAGE_ITEM.PAGE_INDEX-4 >= 1 && PAGE_ITEM.PAGE_INDEX == PAGE_ITEM.PAGE_COUNT}" >
+        <a th:href="@{${PAGE_ITEM.PAGE_URL_PATH} + '?pageIndex=' + ${PAGE_ITEM.PAGE_INDEX-4} + ${PAGE_ITEM.PAGE_URL_PARAMETER}}">[[${PAGE_ITEM.PAGE_INDEX-4}]]</a>
+    </li>
+    <li th:if="${PAGE_ITEM.PAGE_INDEX-3 >= 1 && PAGE_ITEM.PAGE_COUNT-PAGE_ITEM.PAGE_INDEX <= 1 }" >
+        <a th:href="@{${PAGE_ITEM.PAGE_URL_PATH} + '?pageIndex=' + ${PAGE_ITEM.PAGE_INDEX-3} + ${PAGE_ITEM.PAGE_URL_PARAMETER}}">[[${PAGE_ITEM.PAGE_INDEX-3}]]</a>
+    </li>
+    <li th:if="${PAGE_ITEM.PAGE_INDEX-2 >= 1}" >
+        <a th:href="@{${PAGE_ITEM.PAGE_URL_PATH} + '?pageIndex=' + ${PAGE_ITEM.PAGE_INDEX-2} + ${PAGE_ITEM.PAGE_URL_PARAMETER}}">[[${PAGE_ITEM.PAGE_INDEX-2}]]</a>
+    </li>
+    <li th:if="${PAGE_ITEM.PAGE_INDEX-1 >= 1}" >
+        <a th:href="@{${PAGE_ITEM.PAGE_URL_PATH} + '?pageIndex=' + ${PAGE_ITEM.PAGE_INDEX-1} + ${PAGE_ITEM.PAGE_URL_PARAMETER}}">[[${PAGE_ITEM.PAGE_INDEX-1}]]</a>
+    </li>
+    <li class="active">
+        <a th:text="${PAGE_ITEM.PAGE_INDEX}">[[${PAGE_ITEM.PAGE_INDEX}]]</a>
+    </li>
+    <li th:if="${PAGE_ITEM.PAGE_INDEX+1 <= PAGE_ITEM.PAGE_COUNT}" >
+        <a th:href="@{${PAGE_ITEM.PAGE_URL_PATH} + '?pageIndex=' + ${PAGE_ITEM.PAGE_INDEX+1} + ${PAGE_ITEM.PAGE_URL_PARAMETER}}">[[${PAGE_ITEM.PAGE_INDEX+1}]]</a>
+    </li>
+    <li th:if="${PAGE_ITEM.PAGE_INDEX+2 <= PAGE_ITEM.PAGE_COUNT}" >
+        <a th:href="@{${PAGE_ITEM.PAGE_URL_PATH} + '?pageIndex=' + ${PAGE_ITEM.PAGE_INDEX+2} + ${PAGE_ITEM.PAGE_URL_PARAMETER}}">[[${PAGE_ITEM.PAGE_INDEX+2}]]</a>
+    </li>
+    <li th:if="${PAGE_ITEM.PAGE_INDEX+3 <= PAGE_ITEM.PAGE_COUNT && PAGE_ITEM.PAGE_INDEX < 3}" >
+        <a th:href="@{${PAGE_ITEM.PAGE_URL_PATH} + '?pageIndex=' + ${PAGE_ITEM.PAGE_INDEX+3} + ${PAGE_ITEM.PAGE_URL_PARAMETER}}">[[${PAGE_ITEM.PAGE_INDEX+3}]]</a>
+    </li>
+    <li th:if="${PAGE_ITEM.PAGE_INDEX+4 <= PAGE_ITEM.PAGE_COUNT && PAGE_ITEM.PAGE_INDEX < 2}" >
+        <a th:href="@{${PAGE_ITEM.PAGE_URL_PATH} + '?pageIndex=' + ${PAGE_ITEM.PAGE_INDEX+4} + ${PAGE_ITEM.PAGE_URL_PARAMETER}}">[[${PAGE_ITEM.PAGE_INDEX+4}]]</a>
+    </li>
+    <li th:class="${PAGE_ITEM.PAGE_INDEX == PAGE_ITEM.PAGE_COUNT} ? 'disabled' : ''">
+        <a th:if="${PAGE_ITEM.PAGE_INDEX != PAGE_ITEM.PAGE_COUNT}" th:href="@{${PAGE_ITEM.PAGE_URL_PATH} + '?pageIndex=' + ${PAGE_ITEM.PAGE_INDEX+1} + ${PAGE_ITEM.PAGE_URL_PARAMETER}}"> &gt; </a>
+        <a th:if="${PAGE_ITEM.PAGE_INDEX == PAGE_ITEM.PAGE_COUNT}"> &gt; </a>
+    </li>
+</ul>
+</body>
+</html>

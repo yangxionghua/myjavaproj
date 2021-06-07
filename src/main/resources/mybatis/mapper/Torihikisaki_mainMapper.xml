@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.brightstar.springmvcdemo.mapper.Torihikisaki_mainMapper">
+    <!--查询全部-->
+    <select id="queryMainList" resultType="Torihikisaki_main">
+        select * from torihikisaki_main;
+    </select>
+
+    <!--查询某个id-->
+    <select id="queryMainById" resultType="Torihikisaki_main">
+        select * from brightstaroa.torihikisaki_main
+        where TORIHIKI_ID = #{TORIHIKI_ID}
+    </select>
+
+
+    <!--增加插入一个Torihikisaki_main，#{TORIHIKI_NAME_ALL}就是对应页面的name=""属性-->
+    <insert id="addMain" parameterType="Torihikisaki_main">
+        insert into brightstaroa.torihikisaki_main(
+            TORIHIKI_NAME_ALL,TORIHIKI_NAME_RYAKU,YUUBIN,JYUSYO_1,JYUSYO_2,
+            TEL,
+            FAX,
+            URL,
+            BIKOU,
+            DELETE_FLAG,
+            SEIKYUSYO_KUBUN_1,
+            SEIKYUSYO_KUBUN_2,
+            SEIKYUSYO_KUBUN_3,
+            SEIKYUSYO_KUBUN_4,
+            SEIKYUSYO_KUBUN_5,
+            SEIKYUSYO_KUBUN_6,
+            SEIKYUSYO_KUBUN_7,
+            SEIKYUSYO_KUBUN_8,
+            SEIKYUSYO_KUBUN_9,
+            SEIKYUSYO_KUBUN_10,
+            SEIKYUSYO_KUBUN_11,
+            CATEGORY1,
+            CATEGORY2,
+            CATEGORY3,
+            TOUROKUBI,
+            KOUSINNBI
+        )
+        values (
+                   #{TORIHIKI_NAME_ALL},
+                   #{TORIHIKI_NAME_RYAKU},
+                   #{YUUBIN},
+                   #{JYUSYO_1},
+                   #{JYUSYO_2},
+                   #{TEL},
+                   #{FAX},
+                   #{URL},
+                   #{BIKOU},
+                   #{DELETE_FLAG},
+                   #{SEIKYUSYO_KUBUN_1},
+                   #{SEIKYUSYO_KUBUN_2},
+                   #{SEIKYUSYO_KUBUN_3},
+                   #{SEIKYUSYO_KUBUN_4},
+                   #{SEIKYUSYO_KUBUN_5},
+                   #{SEIKYUSYO_KUBUN_6},
+                   #{SEIKYUSYO_KUBUN_7},
+                   #{SEIKYUSYO_KUBUN_8},
+                   #{SEIKYUSYO_KUBUN_9},
+                   #{SEIKYUSYO_KUBUN_10},
+                   #{SEIKYUSYO_KUBUN_11},
+                   #{CATEGORY1},
+                   #{CATEGORY2},
+                   #{CATEGORY3},
+                   #{TOUROKUBI},
+                   #{KOUSINNBI}
+               )
+    </insert>
+
+<!-- 修改一条数据 -->
+    <update id="updateMain" parameterType="Torihikisaki_main">
+        update brightstaroa.torihikisaki_main
+        set
+
+            TORIHIKI_NAME_ALL = #{TORIHIKI_NAME_ALL},
+            TORIHIKI_NAME_RYAKU = #{TORIHIKI_NAME_RYAKU},
+            YUUBIN = #{YUUBIN},
+            JYUSYO_1 = #{JYUSYO_1},
+            JYUSYO_2 = #{JYUSYO_2},
+            TEL = #{TEL},
+            FAX = #{FAX},
+            URL = #{URL},
+            BIKOU = #{BIKOU},
+            DELETE_FLAG = #{DELETE_FLAG},
+            SEIKYUSYO_KUBUN_1 = #{SEIKYUSYO_KUBUN_1},
+            SEIKYUSYO_KUBUN_2 = #{SEIKYUSYO_KUBUN_2},
+            SEIKYUSYO_KUBUN_3 = #{SEIKYUSYO_KUBUN_3},
+            SEIKYUSYO_KUBUN_4 = #{SEIKYUSYO_KUBUN_4},
+            SEIKYUSYO_KUBUN_5 = #{SEIKYUSYO_KUBUN_5},
+            SEIKYUSYO_KUBUN_6 = #{SEIKYUSYO_KUBUN_6},
+            SEIKYUSYO_KUBUN_7 = #{SEIKYUSYO_KUBUN_7},
+            SEIKYUSYO_KUBUN_8 = #{SEIKYUSYO_KUBUN_8},
+            SEIKYUSYO_KUBUN_9 = #{SEIKYUSYO_KUBUN_9},
+            SEIKYUSYO_KUBUN_10 = #{SEIKYUSYO_KUBUN_10},
+            SEIKYUSYO_KUBUN_11 = #{SEIKYUSYO_KUBUN_11},
+            category1 = #{CATEGORY1},
+            category2 = #{CATEGORY2},
+            category3 = #{CATEGORY3},
+            TOUROKUBI = #{TOUROKUBI},
+            KOUSINNBI = #{KOUSINNBI}
+        where TORIHIKI_ID = #{TORIHIKI_ID}
+    </update>
+
+
+    <!--根据id删除一个TORIHIKI_ID -->
+    <delete id="deleteMain" parameterType="int">
+        delete from brightstaroa.torihikisaki_main where TORIHIKI_ID = #{TORIHIKI_ID}
+    </delete>
+
+    <!--查询某个姓名-->
+    <select id="queryMainByName" resultType="Torihikisaki_main">
+        select * from brightstaroa.torihikisaki_main
+        where TORIHIKI_NAME_ALL=#{mainName}
+    </select>
+
+</mapper>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>取引先管理</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="/css/manage.css" type="text/css">
+    <link rel="stylesheet" href="/css/common.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/header.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/pager.css" type="text/css"/>
+    <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+
+</head>
+<body>
+
+<!--<div th:replace="Shared/_head::head"></div>-->
+<div id="edit_box" class="content">
+    <h1><span>■</span>取引先管理</h1>
+    <h2>■検索条件</h2>
+    <div class="content-top">
+        <!--        根据名字name查询，再返回结果，请求发送到controller-->
+        <form method="get" th:action="@{/TORIHIKISAKI/queryMain}" class="manage-form">
+            <label for="name">取引先名</label>
+            <input type="text" name="queryMainName" id="name" value="" required/>
+            <input type="submit" value="検索" STYLE="cursor: pointer"/>
+            <span style="color: red" th:text="${error}"></span>
+        </form>
+    </div>
+    <h2>■取引先一覧</h2>
+    <div class="content-bottom">
+        <div class="row" style="margin-bottom: 5px">
+            <div class="right">
+                <span style="margin-right: 50px" >件数：<span style="color: #007fff">[(${#lists.size(mainlist)})]件</span> </span>
+                <a th:href="@{/TORIHIKISAKI/toAddMain}">新規登録</a>
+            </div>
+        </div>
+        <table border="1" class="manage-table">
+            <thead>
+            <tr>
+                <th style="width: 30%">取引先名</th>
+                <th style="width: 15%">担当者名</th>
+                <th style="width: 25%">担当者Mail</th>
+                <th style="width: 20%">担当者Tel</th>
+                <th style="width: 10%">編集</th>
+            </tr>
+            </thead>
+<!--            thymleaf遍历main表格展示-->
+            <tbody>
+            <tr th:each="ITEM:${mainlist}">
+                <td>[(${ITEM.TORIHIKI_NAME_ALL})]</td>
+                <td>担当者名</td>
+                <td>担当者Mail</td>
+                <td>[(${ITEM.TEL})]</td>
+                <td>
+                    <div>
+                        <a th:href="@{/TORIHIKISAKI/toMainEdit/{ID}(ID=${ITEM.TORIHIKI_ID})}">更新</a>
+                    </div>
+                    <div>
+                        <a href="javascript:void(0);" th:onclick="mainDelete('[(${ITEM.TORIHIKI_ID})]','[(${ITEM.TORIHIKI_NAME_ALL})]')">削除</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+<!--        <div th:replace="Shared/_page::page"></div>-->
+    </div>
+</div>
+<script type="text/javascript">
+    function mainDelete(tORIHIKI_ID, tORIHIKI_NAME_ALL) {
+        if (window.confirm('以下の取引先情報を削除しますか？\n 取引先名：' + tORIHIKI_NAME_ALL+"\nid:"+tORIHIKI_ID)) {
+            $.ajax({
+                type:"post",
+                url:"/TORIHIKISAKI/MainDelete",
+                data:{
+                    "deleteID":tORIHIKI_ID
+                },
+                success:function (data){
+                    if(data){
+                        window.location.reload();
+                        alert("已删除")
+                    }else{
+                        alert(data.message);
+                    }
+                }
+            });
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+server:
+  port: 9090
+datasource:
+  url: localhost:3306
+  dbname: brightstaroa
+  username: root
+  password: 123456
+spring:
+  datasource:
+    # 数据库配置
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${datasource.url}/${datasource.dbname}?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10&serverTimezone=GMT%2B8
+    username: ${datasource.username}
+    password: ${datasource.password}
+    hikari:
+      maximum-pool-size: 20
+      max-lifetime: 1800000
+      minimum-idle: 10
+      idle-timeout: 30000
+      connection-timeout: 60000
+      connection-test-query: SELECT 1
+      pool-name: lightstar
+mybatis:
+# mybatis配置
+#  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com/brightstar/springmvcdemo/pojo
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!--公共复用页面，使用th:fragment定义html片段-->
+
+<!---->
+<div th:fragment="head">
+    <div class="headerBoxContainer">
+        <div class ="headerBox1">
+            <div style="world-break:break-all;font-size:20px;font-weight:bold;" >株式会社ブライトスター</div>
+            <div style="font-size:10px;">BRIGHT STAR CO., Ldiv.</div>
+        </div>
+        <div class ="headerBox2">社内統合管理システム</div>
+        <div class ="headerBox3"><img src="/images/tu.png"/></div>
+    </div>
+
+    <div class="headerBoxContainer">
+        <div class ="headerBox4">登録日時: [(${#temporals.format(AUTH_USER.time,'yyyy年MM月dd日 HH時mm分ss秒')})]</div>
+        <div class ="headerBox5">ユーザ名: [(${AUTH_USER.realName})]</div>
+        <div class ="headerBox6">権限: [(${AUTH_USER.role})]</div>
+        <div class ="headerBox7" ><a th:href="@{/Auth/Logout}">ログアウト</a></div>
+    </div>
+
+    <div class="headerBoxContainer">
+        <div class="meun_1"><input id="TG0100" type="submit" value="作業催促"/></div>
+        <div th:class="${MENU_ITEM}=='/JYUTYU/MainList' ? meun_4 : meun_1">
+            <input id="JYUTYU" type="submit" value="受注管理" th:onclick="window.location.href='/JYUTYU/MainList'"/>
+        </div>
+        <div class="meun_1"><input id="TG0300" type="submit" value="外注管理"/></div>
+        <div class="meun_1"><input id="TG0400" type="submit" value="請求管理"/></div>
+        <div class="meun_1"><input id="TG0500" type="submit" value="見積作成"/></div>
+        <div class="meun_1"><input id="TG0600" type="submit" value="各種類作成"/></div>
+        <div th:class="${MENU_ITEM}=='/TORIHIKISAKI/MainList' ? meun_4 : meun_2">
+            <input id="TORIHIKISAKI" type="submit" value="取引先管理" th:onclick="window.location.href='/TORIHIKISAKI/MainList'"/>
+        </div>
+        <div th:class="${MENU_ITEM}=='/SYAIN/MainList' ? meun_4 : meun_2">
+            <input id="SYAIN" type="submit" value="社員管理" th:onclick="window.location.href='/SYAIN/MainList'"/>
+        </div>
+        <div class="meun_3"><input id="TG0900" type="submit" value="システム設定"/></div>
+        <div class="meun_3"><input id="TG1000" type="submit" value="ユーザ管理"/></div>
+    </div>
+</div>
+</body>
+</html>

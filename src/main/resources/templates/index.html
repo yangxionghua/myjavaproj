@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>[(${WEB_SITE_NAME})]</title>
+    <meta name="renderer" content="webkit">
+    <script type="text/javascript">
+        if (top != self) {
+            top.window.location.replace(self.window.location.href);
+        }
+    </script>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        body {
+            font-family: "Meiryo","Hiragino Kaku Gothic ProN","MS PGothic",sans-serif;
+        }
+
+        div {
+            display: block;
+            position: relative;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            background-color: #EEFAFF;
+        }
+
+        .warper {
+            top: 80px;
+            width: 900px;
+            margin: 0 auto;
+        }
+
+        #tblLogin tr td {
+            height: 20px;
+            padding: 0px 10px;
+        }
+
+        table {
+            border-collapse:collapse;
+            border: none;
+        }
+
+        table tr td.content {
+            padding: 0px 0px 0px 30px;
+            vertical-align: top
+        }
+
+        tr.head td {
+            background-color: #63c8df;
+            height: 20px;
+            border: solid 2px #8e8f8f;
+        }
+
+        tr.loginhead {
+            background-color: #63c8df;
+            border-bottom: solid 2px #8e8f8f;
+        }
+
+        table.line {
+            border: solid 2px #8e8f8f;
+        }
+
+        table.right {
+            width: 400px;
+        }
+
+        table.right table {
+            padding-left: 10px;
+        }
+
+        form label {
+            display: block;
+            float: left;
+            width: 100px;
+            margin: 0;
+            padding: 5px 0 5px 0;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        form span {
+            display: block;
+            margin: 0;
+            margin-left: 100px;
+            padding: 0;
+            text-align: left;
+        }
+
+        form .input {
+            height: 20px;
+            padding: 3px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+        }
+
+        form .input:hover {
+            border: 1px solid #009AD9;
+        }
+
+        form .input:focus {
+            background-color: #F5FBFF;
+            border: 1px solid #009AD9;
+        }
+
+        form input.error {
+            border: 1px solid #f00;
+        }
+
+        form input::-moz-placeholder {
+            color: #d0d0d0;
+        }
+
+        form input:-ms-input-placeholder {
+            color: #d0d0d0;
+        }
+
+        form ::-webkit-input-placeholder {
+            color: #d0d0d0;
+        }
+
+        .error,
+        .error:hover,
+        .error:focus {
+            border: 1px solid #f00;
+        }
+
+        .msg {
+            margin: 0 auto;
+            padding: 6px 0 6px 0;
+            text-align: center;
+            color: #f00;
+        }
+
+        .btn {
+            margin: 0;
+            padding: 5px 20px;
+            text-align: center;
+            color: #fff;
+            background-color: #4974A4;
+            cursor: pointer;
+            border: 1px solid #416892;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            background-color: #668FBB;
+        }
+
+        .btn-green {
+            background-color: #009C03;
+            border: 1px solid #008303;
+            color: white;
+        }
+
+        .btn-green:hover,
+        .btn-green:focus {
+            background-color: #008303;
+            border: 1px solid #008303;
+        }
+        tr.td{
+            text-indent:2em;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="warper">
+    <table class="line">
+        <tr style="height: 93px;">
+            <td style="padding: 0px 0px 0px 30px">
+                <strong>株式会社ブライトスター</strong><br />
+                BRIGHT STAR CO. LTD.
+            </td>
+            <td>
+                社内統合管理システム
+                <img src="/images/tu.png" style="position: absolute; top: 2px; right: 130px;" />
+            </td>
+        </tr>
+        <tr>
+            <td class="content">
+                <form th:action="@{TORIHIKISAKI/MainList}" method="post" id="login">
+                    <table id="tblLogin" class="line">
+                        <tr class="loginhead">
+                            <td colspan="2" style="padding: 0px">利用者登録</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">&nbsp&nbsp&nbsp</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">&nbsp&nbsp&nbsp</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label>ログインID:</label>
+                            </td>
+                            <td>
+                                <input class="input" id="LoginAccount" name="LoginAccount" placeholder="ログインID" type="text" value="B001"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">&nbsp&nbsp&nbsp</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>パスワード:</label>
+                            </td>
+                            <td>
+                                <input class="input" id="LoginPassword" name="LoginPassword" placeholder="パスワード" type="password" value="B001"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center">
+                                <input value="ログイン" class="btn" type="submit" id="logOnButton" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="height: 65px">
+                                <th:block th:unless="${MESSAGE eq ''}">
+                                    <div class="msg" id="msgBlock" th:text="${MESSAGE}">
+                                    </div>
+                                </th:block>
+                                <th:block th:if="${MESSAGE eq ''}">
+                                    <div class="msg" id="msgBlock" style="display: none;">
+                                    </div>
+                                </th:block>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+            <td class="content" style="padding-right: 30px;">
+                <table class="right">
+                    <tr class="head">
+                        <td>応用機能</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table class="login-left">
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-indent:2em;">●受注管理</td>
+                                    <td style="text-indent:2em;">●外注管理</td>
+                                    <td style="text-indent:2em;">●請求作成</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-indent:2em;">●見積作成</td>
+                                    <td style="text-indent:2em;">●作業催促</td>
+                                    <td style="text-indent:2em;">●各書類作成</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="head">
+                        <td>マスタ管理機能</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td>&nbsp&nbsp&nbsp</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-indent:2em;">●取引先情報管理</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-indent:2em;">●社員情報管理</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-indent:5em;">・基本情報 ・履歴 ・経歴</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp&nbsp&nbsp</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="head">
+                        <td>開発関連</td>
+                    </tr>
+                    <tr>
+                        <td>バージョン: [(${VERSION})]</td>
+                    </tr>
+                    <tr>
+                        <td>受注管理機能作成中</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr style="height: 30px;">
+            <td colspan="2"></td>
+        </tr>
+    </table>
+</div>
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/js/jquery.validate.js"></script>
+<script type="text/javascript">
+    var o = {
+        email: $("#LoginAccount").focus(),
+        logOnButton: $("#logOnButton"),
+        mesage: $("#msgBlock")
+    };
+    //jQuery.extend() で複数のオブジェクトをマージできる
+    $.extend($.validator.methods, {
+        userID: function (value, element) {
+            var reg = new RegExp("^[A-Za-z0-9_\-]*$");
+            return reg.test(value);
+        },
+        pwd: function (value, element) {
+            var reg = new RegExp("^[A-Za-z0-9]*$");
+            return reg.test(value);
+        },
+    });
+    $("#login").validate({
+        rules: {
+            "LoginAccount": { required: true, minlength: 4, maxlength: 20, userID: true},
+            "LoginPassword": { required: true, minlength: 4, maxlength: 15, pwd: true},
+        },
+        messages: {
+            "LoginAccount": {
+                required: "ログインIDを入力してください！"
+                , minlength: $.validator.format("ログインIDは（{0}）以上文字で入力してください")
+                , maxlength: $.validator.format("ログインIDは（{0}）以下文字で入力してください")
+                , userID: "ログインIDは（A-Za-z0-9|_|-）で入力してください"
+            },
+            "LoginPassword": {
+                required: "パスワードを入力してください！"
+                , minlength: $.validator.format("パスワードは（{0}）以上で入力してください")
+                , maxlength: $.validator.format("パスワードは（{0}）以下で入力してください")
+                , pwd: "パスワードは（A-Za-z0-9）で入力してください！"
+            }
+        },
+        errorPlacement: function (error, element) {
+            o.mesage.show().html("").append(error.text());
+        },
+        invalidHandler: function (form, validator) {
+
+        },
+        onfocusout: function (element) {
+            $(element).valid();
+        },
+        submitHandler: function (form) {
+            o.logOnButton.val("ログイン...").attr("disabled", "disabled").addClass("disabled");
+            form.submit();
+        }
+    });
+</script>
+
+</body>
+</html>

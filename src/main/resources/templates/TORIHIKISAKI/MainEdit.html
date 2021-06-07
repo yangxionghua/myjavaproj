@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>取引先更新</title>
+    <meta name="viewport" content="width=device-width">
+    <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="/js/inputCheck.js"></script>
+    <script type="text/javascript" src="/js/torihikisaki_edit.js"></script>
+    <link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="/css/manage.css" type="text/css">
+    <link rel="stylesheet" href="/css/common.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/header.css" type="text/css"/>
+</head>
+<body>
+<!--<div th:replace="Shared/_head::head"></div>-->
+
+<div id="edit_box" class="content">
+    <h1><span>■</span>取引先更新</h1>
+    <div class="content-inner">
+        <form class="edit-form" method="post" th:action="@{/TORIHIKISAKI/updateMain}">
+            <h2>基本情報</h2>
+            <input type="hidden" name="TORIHIKI_ID" th:value="${editMainId.TORIHIKI_ID}" />
+            <div class="content-part">
+                <div class="row">
+                    <label for="TORIHIKI_NAME_ALL">取引先名（全名）</label>
+                    <input type="text" id="TORIHIKI_NAME_ALL" name="TORIHIKI_NAME_ALL" th:value="${editMainId.TORIHIKI_NAME_ALL}" />
+                </div>
+                <div class="row">
+                    <label for="TORIHIKI_NAME_RYAKU">会社名（略名）</label>
+                    <input type="text" id="TORIHIKI_NAME_RYAKU" name="TORIHIKI_NAME_RYAKU" th:value="${editMainId.TORIHIKI_NAME_RYAKU}" />
+                </div>
+                <div class="row">
+                    <label for="YUUBIN">住所</label>
+                    <span style="margin: 0 5px">〒</span><input type="text" id="YUUBIN" name="YUUBIN" style="width: 130px" th:value="${editMainId.YUUBIN}" />
+                </div>
+                <div class="row">
+                    <label for="JYUSYO_1"></label>
+                    <input type="text" id="JYUSYO_1" name="JYUSYO_1" style="width: 400px" th:value="${editMainId.JYUSYO_1}" />
+                    <span>番地まで</span>
+                </div>
+                <div class="row">
+                    <label for="JYUSYO_2"></label>
+                    <input type="text" id="JYUSYO_2" name="JYUSYO_2" style="width: 400px;" th:value="${editMainId.JYUSYO_2}" />
+                    <span>マンション名・号室など</span>
+                </div>
+                <div class="row">
+                    <label for="TEL">電話</label>
+                    <input type="text" id="TEL" name="TEL" style="ime-mode: disabled;" th:value="${editMainId.TEL}" />
+                </div>
+                <div class="row">
+                    <label for="FAX">FAX</label>
+                    <input type="text" id="FAX" name="FAX" style="ime-mode: disabled;" th:value="${editMainId.FAX}" />
+                </div>
+
+                <div class="row">
+                    <label for="URL">ホームページ</label>
+                    <input type="text" id="URL" name="URL" style="ime-mode: disabled;width: 400px" th:value="${editMainId.URL}" />
+                </div>
+                <div class="row textarea-row">
+                    <label for="BIKOU">備考</label>
+                    <textarea id="BIKOU" name="BIKOU">[(${editMainId.BIKOU})]</textarea>
+                </div>
+
+                <div class="row textarea-row">
+                    <label for="DELETE_FLAG">論理削除(暂时可选)</label>
+                    <input type="radio" id="DELETE_FLAG" name="DELETE_FLAG" value="1" checked="true">1</input>
+                    <input type="radio"  name="DELETE_FLAG" value="0" >0</input>
+                </div>
+            </div>
+
+            <h2>請求情報</h2>
+            <div class="content-part">
+                <div class="row" style="text-align: right">
+                    <input type="button" value="新規行追加"
+                           style="background-color: #a5a5a5; padding: 2px 20px; background-image: initial"
+                           id="work-history-add" onclick="add_tantou()">
+                    <input type="button" value="最後行削除"
+                           style="background-color: #a5a5a5; padding: 2px 20px; background-image: initial"
+                           id="work-history-remove" onclick="remove_tantou()">
+                </div>
+                <div class="row">
+                    <table class="tantou-table text-center-table">
+                        <tr>
+                            <th style="width: 5%">To</th>
+                            <th style="width: 5%">CC</th>
+                            <th style="width: 10%">姓</th>
+                            <th style="width: 10%">名</th>
+                            <th style="width: 20%">メールアドレス</th>
+                            <th style="width: 10%">所属</th>
+                            <th style="width: 10%">役職</th>
+                            <th style="width: 20%">個人電話番号</th>
+                            <th style="width: 10%">備考</th>
+                        </tr>
+                        <tr th:each="ITEM : ${LIST}">
+                            <input type="hidden" name="tantou_TANTOU_ID" th:value="${ITEM.TANTOU_ID}" />
+                            <input type="hidden" name="tantou_TORIHIKI_ID" th:value="${ITEM.TORIHIKI_ID}" />
+                            <td style="text-align:center;"><input type="checkbox" name="tantou_JIMU_MAIL" value="1" th:checked="${ITEM.JIMU_MAIL}==1" /></td>
+                            <td style="text-align:center;"><input type="checkbox" name="tantou_JIMU_MAIL" value="2" th:checked="${ITEM.JIMU_MAIL}==2" /></td>
+                            <td><input type="text" name="tantou_FIRST_NAME" th:value="${ITEM.FIRST_NAME}" /></td>
+                            <td><input type="text" name="tantou_LAST_NAME" th:value="${ITEM.LAST_NAME}" /></td>
+                            <td><input type="text" name="tantou_MAIL" th:value="${ITEM.MAIL}" /></td>
+                            <td><input type="text" name="tantou_SYOZOKU" th:value="${ITEM.SYOZOKU}" /></td>
+                            <td><input type="text" name="tantou_YAKUSYOKU" th:value="${ITEM.YAKUSYOKU}" /></td>
+                            <td><input type="text" name="tantou_TEL" th:value="${ITEM.TEL}" /></td>
+                            <td><input type="text" name="tantou_BIKOU" th:value="${ITEM.BIKOU}" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <h2></h2>
+            <div style="text-align: center">
+                <input type="submit" value="更　新" onclick="" style="cursor: pointer">
+            </div>
+        </form>
+    </div>
+    <br/><br/><br/><br/>
+</div>
+</body>
+</html>
